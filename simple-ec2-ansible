@@ -1,0 +1,26 @@
+/** Install following packages
+sudo apt install python
+sudo apt install python-pip
+pip install boto boto3 ansible
+
+Create an IAM user in AWS, then we can use these IAM credentials as an environmental variable.
+eg:     export AWS_DEFAULT_REGION=us-east-1
+        export AWS_SECRET_ACCESS_KEY=xxxxxxxxxx7YLRCDrp1J9UrZi9ZV6d4cadJi1
+        export AWS_ACCESS_KEY_ID=xxxxxxxxxZZ3OWUAR
+*/
+
+---
+  - name: EC-2 Creatin using Ansible
+    hosts: localhost
+    connection: local
+    tasks:
+     - ec2:
+              key_name: myaws
+              instance_type: t2.micro
+              image: ami-00068cd7555f543d5
+              wait: yes
+              group: cli-sec
+              count: 2
+              vpc_subnet_id: subnet-0e1e7052
+              assign_public_ip: yes
+~                                      
